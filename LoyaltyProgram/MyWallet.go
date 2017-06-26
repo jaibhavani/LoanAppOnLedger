@@ -16,7 +16,7 @@ var logger = shim.NewLogger("mylogger")
 
 func (t *SampleChaincode) Init(stub shim.ChaincodeStubInterface, function string, args []string) ([]byte, error) {
 
-	if len(args) != 3 {
+	if len(args) != 2 {
 		return nil, errors.New("Incorrect number of arguments. Expecting 3")
 	}
 
@@ -49,6 +49,16 @@ func redeem (stub shim.ChaincodeStubInterface, args []string) ([]byte,error){
 
 		_, err := LoyaltyPkg.RedeemPoints(stub, args)
 
+	if err != nil {
+
+		fmt.Println(err)
+		return nil, errors.New("Errors while creating  wallet for user  " + args[0])
+	}
+
+	logger.Info("Successfully redeemed points  for user  " + args[0])
+
+	return nil, nil
+
 }
 
 
@@ -59,7 +69,7 @@ func redeem (stub shim.ChaincodeStubInterface, args []string) ([]byte,error){
 
 func createWallet(stub shim.ChaincodeStubInterface, args []string) ([]byte, error) {
 
-	if len(args) != 3 {
+	if len(args) != 2 {
 		return nil, errors.New("Incorrect number of arguments. Expecting 3 name, password, points")
 	}
 
@@ -81,19 +91,26 @@ func (t *SampleChaincode) Invoke(stub shim.ChaincodeStubInterface, function stri
 	fmt.Println("invoke is running " + function)
 
 	if function == "redeem" {
-		return addPoints(stub, args)
+		return redeem(stub, args)
 	} else if function == "createwallet" {
 		return createWallet(stub, args)
-	}
+	} 
 
 	return nil, nil
 }
 
 // Query
 func (t *SampleChaincode) Query(stub shim.ChaincodeStubInterface, function string, args []string) ([]byte, error) {
+	if function == "read" {
+		return LoyaltyPkg.GetUserLoyaltyWallet(stub, args)
+	}
 
-	return nil, nil
+	fmt.Println(" Invalid function passed to Query function " + function)
+
+	return nil, errors.New(" Invalid function passed to Query function " + function)
 }
+
+
 
 // main
 func main() {
