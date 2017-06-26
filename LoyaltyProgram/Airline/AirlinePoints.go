@@ -22,7 +22,7 @@ var logger = shim.NewLogger("mylogger")
 // arg[3] transaction type - reward
 // arg[4] is the LoyaltyPoints
 func addPoints(stub shim.ChaincodeStubInterface, args []string) ([]byte, error) {
-	if len(args) != 4 {
+	if len(args) != 5 {
 		return nil, errors.New("Incorrect number of arguments. Expecting 4 walletid,entity name, transactionid, reward and points")
 	}
 
