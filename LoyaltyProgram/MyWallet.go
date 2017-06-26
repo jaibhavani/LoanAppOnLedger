@@ -18,7 +18,7 @@ var logger = shim.NewLogger("mylogger")
 func (t *SampleChaincode) Init(stub shim.ChaincodeStubInterface, function string, args []string) ([]byte, error) {
 
 	logger.Info(" length of arguments " + strconv.Itoa(len(args)))
-	if len(args) != 2 {
+	if len(args) != 3 {
 		return nil, errors.New("Incorrect number of arguments. Expecting 3")
 	}
 
@@ -45,8 +45,8 @@ func (t *SampleChaincode) Init(stub shim.ChaincodeStubInterface, function string
 // Thus function will call the corresponding entity API to redeem th points to the agreed format. Once its successful 
 func redeem (stub shim.ChaincodeStubInterface, args []string) ([]byte,error){
 
-	if len(args) != 4 {
-			return nil, errors.New("Incorrect number of arguments. Expecting 4")
+	if len(args) != 5 {
+			return nil, errors.New("Incorrect number of arguments. Expecting 5")
 		}
 
 		_, err := LoyaltyPkg.RedeemPoints(stub, args)

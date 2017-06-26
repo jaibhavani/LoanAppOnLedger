@@ -48,8 +48,8 @@ func GetUserLoyaltyWallet(stub shim.ChaincodeStubInterface, args []string) ([]by
 // arg[1] password
 // arg[2] points For the first time it will be 0
 func CreateWallet(stub shim.ChaincodeStubInterface, args []string) ([]byte, error) {
-	logger.Debug("Entering Cretae Loyalty wallet ")
-	if len(args) < 2 {
+	logger.Debug("Entering Create Loyalty wallet ")
+	if len(args) != 3 {
 		return nil, errors.New("Incorrect number of arguments. Expecting  name, password, points")
 	}
 
