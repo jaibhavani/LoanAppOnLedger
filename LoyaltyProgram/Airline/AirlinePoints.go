@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"github.com/hyperledger/fabric/core/chaincode/shim"
 	"github.com/jaibhavani/LoanAppOnLedger/LoyaltyProgram/LoyaltyPkg"
+	
 )
 
 // SimpleChaincode example simple Chaincode implementation
@@ -38,11 +39,6 @@ func addPoints(stub shim.ChaincodeStubInterface, args []string) ([]byte, error) 
 
 	return nil, nil
 }
-
-
-
-
-
 
 // Init function
 func (t *SampleChaincode) Init(stub shim.ChaincodeStubInterface, function string, args []string) ([]byte, error) {
