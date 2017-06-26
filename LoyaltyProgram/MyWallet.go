@@ -3,6 +3,7 @@ package main
 import (
 	"errors"
 	"fmt"
+	"strconv"
 
 	"github.com/hyperledger/fabric/core/chaincode/shim"
 	"github.com/jaibhavani/LoanAppOnLedger/LoyaltyProgram/LoyaltyPkg"
@@ -16,6 +17,7 @@ var logger = shim.NewLogger("mylogger")
 
 func (t *SampleChaincode) Init(stub shim.ChaincodeStubInterface, function string, args []string) ([]byte, error) {
 
+	logger.Info(" length of arguments " + strconv.Itoa(len(args)))
 	if len(args) != 2 {
 		return nil, errors.New("Incorrect number of arguments. Expecting 3")
 	}
